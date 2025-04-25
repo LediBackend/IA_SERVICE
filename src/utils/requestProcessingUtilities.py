@@ -1,7 +1,7 @@
 from openai import OpenAI
 from src.config.env import TOKEN,ENDPOINT,MODEL
-from src.templates.templateContainer import getTemplate
-from src.utils.databaseUtilities import get_all_documents
+
+
 
 def retrieveDocs(query, fVector, bookName=None):
     
@@ -20,15 +20,12 @@ def retrieveDocs(query, fVector, bookName=None):
     return docs
 
 #falta ampliar la lógica pra tener memoria de cada usuario 
-def responseGenerator(context,question):    
+def responseGenerator(question,template):    
     token = TOKEN
     endpoint = ENDPOINT
     model = MODEL
 
-    user = get_all_documents('user','users')
-
-    print(user)
-
+    
     client = OpenAI(
         base_url = endpoint,
         api_key = token,
@@ -39,7 +36,7 @@ def responseGenerator(context,question):
         messages=[
             {
                 "role": "system",
-                "content": getTemplate(context),
+                "content": template,
             },
             {
                 "role": "user",

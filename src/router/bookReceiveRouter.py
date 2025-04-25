@@ -6,7 +6,7 @@ from src.components.classEmbeddings import vector_store
 
 bookReceiveRouter = APIRouter()
 
-@bookReceiveRouter.post('/upload')
+@bookReceiveRouter.post('/upload',tags=['Books'])
 async def bookReceive(file:UploadFile = File(...)):
 
      UPLOAD_FOLDER = './src/uploads'
