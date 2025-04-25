@@ -1,0 +1,15 @@
+# Archivos del entorno virtual
+.venv
+.env
+*.pyc
+__pycache__/
+db
+# Dependencias
+
+# Logs y datos temporales
+logs/
+*.log
+*.pdf
+# Archivos generados por el sistema
+.DS_Store
+
