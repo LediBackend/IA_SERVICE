@@ -5,14 +5,14 @@ from src.components.classEmbeddings import vector_store
 from src.utils.databaseUtilities import get_document,insert_document,append_to_array,get_document_by_id
 from src.templates.templateContainer import getTemplateChatBot
 
-requestReceiverRoute = APIRouter()
+requestReceiverRouter = APIRouter()
 
 class QueryRequest(BaseModel):
     question: str | None = None
     book_name: str | None = None
     userId:str
 
-@requestReceiverRoute.post('/request',tags=['ChatBot'])
+@requestReceiverRouter.post('/request',tags=['ChatBot'])
 
 async def requestReceiver(request:QueryRequest):
 

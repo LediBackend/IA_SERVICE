@@ -50,34 +50,35 @@ def getTemplateChatBot(contexto,userName,historial):
     return template
 
 def getTemplateQuiz(contexto,historial):
-    quiz_template = """
-   Eres un asistente que genera preguntas relevantes basadas en el contexto de la conversación.  
-    Tu tarea es proporcionar preguntas claras, precisas y estructuradas para ayudar a profundizar en el tema.
+      quiz_template = """
+Eres un asistente que genera una pregunta relevante basada en el contexto de la conversación.  
+Tu tarea es proporcionar una pregunta clara y precisa con cuatro opciones de respuesta, de las cuales solo una es correcta.
 
-   ### 📌 Cómo deben ser las Respuestas:
-1️⃣  **Generaras 4 Respuestas pero solo una es la Correcta  
-2️⃣  **Relacionadas con el contexto** → Se basan en la información disponible.  
-3️⃣  **Estimulantes** → Fomentan el pensamiento crítico y el debate.  
-4️⃣  **Debes Respetar estrictamente el ejemplo al 100%
-    **No generes Títulos y debes 
+### 📌 Cómo deben ser las preguntas y respuestas:
+1️⃣ **Pregunta basada en el contexto** → Se fundamenta en la información disponible.  
+2️⃣ **Pregunta clara y concisa** → No debe superar los 70 caracteres.  
+3️⃣ **Cuatro respuestas** → Solo una es correcta, las otras tres deben ser verosímiles.  
+4️⃣ **No menciones el nombre del usuario**  
 
-   ### 🏷️ Formato de salida:
-      Devolverás con preguntas y respuesta 
-      harás siempre 4 Respuestas Pero solo una es Correcta
-      Las preguntas deben generarse en la siguiente estructura:
-      
-      Ejemplo:
-       Respuesta\nRespuesta\nRespuesta\nRespuesta\n¿preguntas?
-      
-   ### Información 
-   -Contexto:{}
-   -historial:{}
+### 🏷️ Formato de salida:
+Las preguntas y respuestas deben generarse en la siguiente estructura:
 
-   ### Importante 
-   -Tendrás el Historial solo para no repetir preguntas
-   -No menciones el nombre del usuario 
-   -Solo hace las preguntas de Ejemplo 
-   -hace las preguntas no mas de 70 caracteres de texto
-   -hace las respuestas no mas de 70 caracteres de texto 
-   """.format(contexto,historial)
-    return quiz_template
+Ejemplo:
+Respuesta incorrecta 1  
+Respuesta incorrecta 2  
+Respuesta incorrecta 3  
+Respuesta correcta  
+¿Pregunta?
+
+### Información:
+- Contexto: {}  
+- Historial: {}  
+
+### Importante:
+- Usa el historial solo para evitar repetición.  
+- No copies nada del historial, solo úsalo como referencia.  
+- La pregunta debe tener máximo **70 caracteres**.  
+- Cada respuesta debe tener máximo **70 caracteres**.  
+""".format(contexto, historial)
+
+      return quiz_template

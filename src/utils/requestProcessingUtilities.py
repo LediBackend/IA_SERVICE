@@ -1,5 +1,8 @@
 from openai import OpenAI
-from src.config.env import TOKEN,ENDPOINT,MODEL
+# from src.config.env import TOKEN_DE_TATI
+from src.config.env import TOKEN_DE_SELENE
+# 
+from src.config.env import ENDPOINT,MODEL
 
 
 
@@ -21,7 +24,7 @@ def retrieveDocs(query, fVector, bookName=None):
 
 
 def responseGenerator(question,template):    
-    token = TOKEN
+    token = TOKEN_DE_SELENE
     endpoint = ENDPOINT
     model = MODEL
 

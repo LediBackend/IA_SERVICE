@@ -1,10 +1,12 @@
 from fastapi import FastAPI
 from src.router.bookReceiveRouter import bookReceiveRouter
-from src.router.requestReceiverRoute import requestReceiverRoute
-from src.router.questionnaireCreationRoutes import questionnaireCreationRoutes
+from src.router.requestReceiverRouter import requestReceiverRouter
+from src.router.questionnaireCreationRouter import questionnaireCreationRouter
+from src.router.bookRecommendationRouter import bookRecommendationRouter
 app = FastAPI()
 
 app.include_router(router=bookReceiveRouter)
-app.include_router(router=requestReceiverRoute)
-app.include_router(router=questionnaireCreationRoutes)
+app.include_router(router=requestReceiverRouter)
+app.include_router(router=questionnaireCreationRouter)
+app.include_router(router=bookRecommendationRouter)
 
