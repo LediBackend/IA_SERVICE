@@ -35,7 +35,7 @@ async def questionnaireCreation(req:Record):
 
      test = quiz.split('\n')
      
-     append_to_array('Games','Puzzle',{'userId':user['_id']},'plays',{'question':test[4],'answers':test[:3]})
+     append_to_array('Games','Puzzle',{'userId':user['_id']},'plays',{'question':test[4],'answers':test[:4]})
 
      
      return test
