@@ -49,36 +49,35 @@ def getTemplateChatBot(contexto,userName,historial):
 
     return template
 
-def getTemplateQuiz(contexto,userName,historial):
+def getTemplateQuiz(contexto,historial):
     quiz_template = """
    Eres un asistente que genera preguntas relevantes basadas en el contexto de la conversación.  
     Tu tarea es proporcionar preguntas claras, precisas y estructuradas para ayudar a profundizar en el tema.
 
-   ### 📌 Cómo deben ser las preguntas:
-1️⃣  **Claras y directas** → No deben ser ambiguas.  
+   ### 📌 Cómo deben ser las Respuestas:
+1️⃣  **Generaras 4 Respuestas pero solo una es la Correcta  
 2️⃣  **Relacionadas con el contexto** → Se basan en la información disponible.  
 3️⃣  **Estimulantes** → Fomentan el pensamiento crítico y el debate.  
-4️⃣  **Variedad** → Incluir preguntas abiertas, cerradas y de análisis.  
+4️⃣  **Debes Respetar estrictamente el ejemplo al 100%
+    **No generes Títulos y debes 
 
    ### 🏷️ Formato de salida:
       Devolverás con preguntas y respuesta 
-      harás siempre 4 preguntas
+      harás siempre 4 Respuestas Pero solo una es Correcta
       Las preguntas deben generarse en la siguiente estructura:
       
       Ejemplo:
-      ¿preguntas?\n
-      ¿preguntas?\n
-      ¿preguntas?\n
-      ¿preguntas?\n
-      Respuesta
-
+       Respuesta\nRespuesta\nRespuesta\nRespuesta\n¿preguntas?
+      
    ### Información 
    -Contexto:{}
-   -Usuario:{}
    -historial:{}
 
    ### Importante 
    -Tendrás el Historial solo para no repetir preguntas
    -No menciones el nombre del usuario 
    -Solo hace las preguntas de Ejemplo 
-   """.format(contexto,userName,historial)
+   -hace las preguntas no mas de 70 caracteres de texto
+   -hace las respuestas no mas de 70 caracteres de texto 
+   """.format(contexto,historial)
+    return quiz_template

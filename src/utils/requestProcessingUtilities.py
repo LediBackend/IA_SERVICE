@@ -19,7 +19,7 @@ def retrieveDocs(query, fVector, bookName=None):
         ]
     return docs
 
-#falta ampliar la lógica pra tener memoria de cada usuario 
+
 def responseGenerator(question,template):    
     token = TOKEN
     endpoint = ENDPOINT
