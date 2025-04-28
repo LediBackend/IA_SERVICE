@@ -5,6 +5,10 @@ import os
 import hashlib
 import pdfplumber
 import docx
+from deep_translator import GoogleTranslator
+
+def translateToEnglish(text):
+    return GoogleTranslator(source="es", target="en").translate(text)
 
 async def processedAndSaved(uploadFolder,file,fileName):
      
@@ -93,3 +97,12 @@ def textSplitter(document, bookName=None):
 def indexDocs(documents, fVector):
     
     fVector.add_documents(documents)
+
+
+
+
+
+
+
+
+
