@@ -82,3 +82,22 @@ Respuesta correcta
 """.format(contexto, historial)
 
       return quiz_template
+
+def getRecommendationTemplates(libros,preference,language):
+     
+     RecommendationTemplates = '''
+      #Te Llamas LeDi
+      ##Tareas
+      -harás recomendaciones e libros que se pase pro contexto
+
+      ## Reglas 
+      -usaras las preferencias y el lenguaje para hacer las recomendaciones 
+      
+      # Libros guardados:{}
+
+      # Preferencias del usuario
+      -lenguaje:{}
+      -preferencias:{}
+
+      
+'''
