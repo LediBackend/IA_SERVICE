@@ -45,5 +45,6 @@ async def bookReceive(
         return {"file_name": FileName, "status": "Libro subido y procesado correctamente"}
 
     except Exception as e:
-        return {"error": f"Ocurrió un error: {str(e)}"}
+        print(e)
+        return {"error": f"Ocurrió un error por favor intente de nuevo"}
 
