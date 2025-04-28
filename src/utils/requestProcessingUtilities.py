@@ -23,6 +23,28 @@ def retrieveDocs(query, fVector, bookName=None):
     return docs
 
 
+def retrieveDocsForCategory(fVector, preference, k=10):
+    categories = [cat.lower().strip() for cat in preference.get('category', [])]
+    language = preference.get('lenguaje', '').lower().strip()
+    docs_test = fVector.similarity_search("", k=5)
+    for doc in docs_test:
+        print(doc.metadata)  # Ver qué datos realmente están almacenados
+
+
+
+    # Buscar todos los documentos en el vector store
+    docs = fVector.similarity_search("", k=k)  # Búsqueda vacía para obtener documentos
+
+    # Filtrar por categorías y lenguaje
+    docs = [
+        doc for doc in docs
+        if doc.metadata.get("language", "").lower().strip() == language and
+           doc.metadata.get("category", "").lower().strip() in categories
+    ]
+
+    return docs
+
+
 def responseGenerator(question,template):    
     token = TOKEN_DE_SELENE
     endpoint = ENDPOINT
