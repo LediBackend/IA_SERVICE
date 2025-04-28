@@ -1,13 +1,17 @@
 from langchain.schema import Document
-from fastapi import APIRouter,File,UploadFile
+from fastapi import APIRouter,File,UploadFile,Body
 import os
-from src.utils.processingUtilities import processedAndSaved,getFileHash,isPdfAlreadyIndexed,loadFile,textSplitter,indexDocs
+from src.utils.processingUtilities import processedAndSaved,getFileHash,isPdfAlreadyIndexed,loadFile,textSplitter,indexDocs,translateToEnglish
 from src.components.classEmbeddings import vector_store
 
 bookReceiveRouter = APIRouter()
 
+
+    
+
 @bookReceiveRouter.post('/upload',tags=['Books'])
-async def bookReceive(file:UploadFile = File(...)):
+async def bookReceive(category:str = Body(...),
+    language:str = Body(...),file:UploadFile = File(...)):
 
      UPLOAD_FOLDER = './src/uploads'
      
@@ -40,6 +44,11 @@ async def bookReceive(file:UploadFile = File(...)):
         doc.metadata["file_hash"] = FileHash
         
         doc.metadata["book_name"] = FileName
+
+        doc.metadata["language"] = language
+
+        doc.metadata['category'] = translateToEnglish(category.lower())
+
 
      indexDocs(ChunkedDocument,vector_store)
 
