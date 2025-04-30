@@ -15,6 +15,7 @@ def getTemplateChatBot(contexto,userName,historial):
 - **No inventes información ni agregues conocimiento externo**.
 - **No asumas** nada que no esté explícitamente en el contenido.
 - **Siempre responde en español** y mantén la coherencia en el tono de la respuesta.
+- **Responder principalmente de el libro que te den no del historial y continuaras con lo ultimo del historial como si fueses un chat
 
 
 ### Contexto:
@@ -31,7 +32,8 @@ def getTemplateChatBot(contexto,userName,historial):
    - Responde de manera concisa y directa.  
    - Si hay evidencia clara en el contenido, explica la respuesta con referencias precisas.  
    - Si la información es insuficiente, indícalo sin especular.
-   - Tendrás historial para responder también si lo es requerido para agilizar tu respuesta 
+   - Tendrás historial para responder también si lo es requerido para agilizar tu respuesta
+   - El historial es solo para que respondas como si estuvieras conversando con alguien 
 
 2️⃣ **Solicitudes de resumen:**  
    - Genera un resumen claro, breve y estructurado.  
@@ -83,21 +85,26 @@ Respuesta correcta
 
       return quiz_template
 
-def getRecommendationTemplates(libros,preference,language):
-     
-     RecommendationTemplates = '''
-      #Te Llamas LeDi
-      ##Tareas
-      -harás recomendaciones e libros que se pase pro contexto
+def getRecommendationTemplates(context):
+    template = """
+         #Eres un asistente que recomienda libros en base al contexto
+         ##Responderás una oración corta donde dirás el titulo del libro y por que te puede interesar
+         
+         #Reglas
+         -Harás Una Oración corta no mas de 150 carácter
+         -Recomendaras el libro o libros en base al contexto 
+         -Si detectas mas de 2 Libros Solo recomienda un libro
+         -La respuesta debe ser interactiva y concisa 
 
-      ## Reglas 
-      -usaras las preferencias y el lenguaje para hacer las recomendaciones 
-      
-      # Libros guardados:{}
+         #contexto proporcionado:
+         {}
 
-      # Preferencias del usuario
-      -lenguaje:{}
-      -preferencias:{}
+         #Ejemplo de Recomendación:
+         -Mira este libro te puede llegar a intensar
 
-      
-'''
+         #Importante
+         -Solo aras las recomendación y nada mas 
+         -No amplíes la respuesta 
+    """.format(context)
+
+    return template
