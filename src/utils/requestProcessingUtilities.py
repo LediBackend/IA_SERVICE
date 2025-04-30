@@ -23,26 +23,26 @@ def retrieveDocs(query, fVector, bookName=None):
     return docs
 
 
-def retrieveDocsForCategory(fVector, preference, k=10):
+def retrieveDocsForCategory(fVector, preference, k=10, fetch_size=100):
     categories = [cat.lower().strip() for cat in preference.get('category', [])]
-    language = preference.get('lenguaje', '').lower().strip()
-    docs_test = fVector.similarity_search("", k=5)
-    for doc in docs_test:
-        print(doc.metadata)  # Ver qué datos realmente están almacenados
+    language = preference.get('language', '').lower().strip()
 
+    try:
+        docs = fVector.similarity_search("", k=fetch_size)
+        
+        filtered_docs = []
+        for doc in docs:
+            doc_lang = doc.metadata.get("language", "").lower().strip()
+            doc_cat = doc.metadata.get("category", "").lower().strip()
+                        
+            if doc_lang == language and doc_cat in categories:
+                filtered_docs.append(doc)
 
+        return filtered_docs[:k]
 
-    # Buscar todos los documentos en el vector store
-    docs = fVector.similarity_search("", k=k)  # Búsqueda vacía para obtener documentos
-
-    # Filtrar por categorías y lenguaje
-    docs = [
-        doc for doc in docs
-        if doc.metadata.get("language", "").lower().strip() == language and
-           doc.metadata.get("category", "").lower().strip() in categories
-    ]
-
-    return docs
+    except Exception as e:
+        print(f"[retrieveDocsForCategory] Error: {e}")
+        return []
 
 
 def responseGenerator(question,template):    
