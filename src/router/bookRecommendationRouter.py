@@ -4,6 +4,7 @@ from pydantic import BaseModel
 from src.utils.databaseUtilities import get_document_by_id
 from src.utils.requestProcessingUtilities import responseGenerator,retrieveDocsForCategory
 from src.components.classEmbeddings import vector_store
+from src.templates.templateContainer import getRecommendationTemplates
 
 
 bookRecommendationRouter =APIRouter()
@@ -18,11 +19,17 @@ def bookRecommendation(req:DataUser):
      if not user:
           return JSONResponse({'msg':'usuario no registrado'},status_code=404)
 
-     preference = user['preference']
+     preferences = user['preference']
 
-     searchedBooks = retrieveDocsForCategory(vector_store,preference)
+     try:
+          searchedBooks = retrieveDocsForCategory(vector_store,preferences)
+     except Exception as error:
+          print(f"Error al recuperar libros: {error}")
+          return JSONResponse({'msg': 'Error al recuperar libros'}, status_code=500)
 
-     print(searchedBooks)
+     context = "\n".join([doc.page_content for doc in searchedBooks])
+     
+     res = responseGenerator('',getRecommendationTemplates(context))
 
-     return 'hola'
+     return JSONResponse({'response':res})
 
